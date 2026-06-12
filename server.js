@@ -383,7 +383,7 @@ app.get('/api/status', (req, res) => {
   });
 });
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`\n=========================================`);
   console.log(`  CENT OPTION RADAR — BACKEND LIVE`);
