@@ -362,6 +362,7 @@ app.get('/api/scan', async (req, res) => {
     totalCandidates: allCandidates.length,
     totalCalls: allCalls.length,
     totalPuts: allPuts.length,
+    errorDetails: errors.slice(0, 5),
     errors: errors.length,
     topCalls: top10Calls,
     topPuts: top10Puts
