@@ -1,6 +1,18 @@
 import express from 'express';
 import cors from 'cors';
 import YahooFinance from 'yahoo-finance2';
+import { setGlobalDispatcher, ProxyAgent } from 'undici';
+
+// Route all requests through a proxy if configured (useful for hosted servers like Render)
+if (process.env.PROXY_URL) {
+  console.log(`[PROXY] Initializing global proxy dispatcher: ${process.env.PROXY_URL}`);
+  try {
+    const proxyAgent = new ProxyAgent(process.env.PROXY_URL);
+    setGlobalDispatcher(proxyAgent);
+  } catch (err) {
+    console.error('[PROXY ERROR] Failed to initialize proxy agent:', err.message);
+  }
+}
 
 const app = express();
 app.use(cors());
